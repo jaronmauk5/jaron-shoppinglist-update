@@ -8,7 +8,7 @@ var config = require('./config');
 var apiroutes = require("./src/routes/api")
 
 app.use(bodyParser.json())
-app.use(express.static("client"))
+app.use(express.static(__dirname + "/client"))
 
 var runServer = function(callback) {
     mongoose.connect(config.DATABASE_URL, function(err) {
