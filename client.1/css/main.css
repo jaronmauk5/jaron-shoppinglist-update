@@ -1,0 +1,242 @@
+body{
+	font-family: 'Raleway', sans-serif;
+}
+
+
+.top-navigation {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left:0;
+	z-index: 10;
+}
+
+h1{
+	text-align: center;
+	font-size: 2.25em;
+	font-weight: 300;
+	color: white;
+	padding: 0.67em 10px 0.67em 0px;
+	margin: 0;
+}	
+.top-navigation .content {
+	background-color: #15A9FE;
+	background: linear-gradient(to right, #1ACFFF, #0B62FE);
+	position: relative;
+	z-index:12;
+}
+
+.top-navigation .fa-bars {
+	color: white;
+	font-size: 2.25em;
+    position: absolute;
+    left: 1em;
+    top: 0.8em
+}
+
+.top-navigation .fa-plus-square-o {
+	color: white;
+	font-size: 2.55em;
+	position:absolute;
+	right: 1em;
+	top: 0.8em;
+
+}
+
+.logo {
+	text-align: center;
+	vertical-align: -12px;
+	margin-right: -15px;
+	height: 50px;
+}
+
+.item-list {
+	display: none;
+}
+
+.list-menu {
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 30%;
+	height: 100vh;
+	padding-top: 98.219px;
+	background-color:#B2B2B2; 
+	z-index: 10;
+	box-shadow: 5px 0px 10px #6A6A6A;
+
+}
+
+.list-menu ul {
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+
+.list-menu a {
+	display: block;
+	text-align: center;
+	padding: 1em;
+	font-size: 18px;
+	font-weight: 300;
+	text-decoration: none;
+	color:white;
+}
+
+.list-menu h3 {
+	text-align: center;
+	color:white;
+	font-weight: 400;
+	font-size: 24px;
+	text-decoration: underline;
+}
+
+
+.form-group {
+	padding-top: 126.219px;
+	text-align: center;
+}
+
+.form-group h2{
+	font-weight: 300;
+	font-size: 1.95em;
+}
+
+hr {
+	width: 50%;
+}
+
+.submit-wrapper{
+	margin-top: 25.8px;
+}
+
+.input-text {
+	text-align: center;
+	padding:10px 16px;
+	border: solid 1px #B1B1B1;
+	border-radius: 5px;
+	
+}
+
+.newlist {
+	display: none;
+}
+.newlist .input-text {
+	margin-bottom: 10px;
+}
+
+.submit-button, .cancel-button {
+	background-color: white;
+	border:0;
+	position: relative;
+    border-radius: 5px;
+    color: black;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.5s; /* Safari */
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+.submit-button::after, .cancel-button::after {
+	background:linear-gradient(to right, #1ACFFF, #0B62FE);
+	border-radius: 5px;
+	position: absolute;
+    top: -2px; bottom: -2px;
+    left: -2px; right: -2px;
+    content: '';
+	z-index: -1;
+}
+
+.submit-button:hover, .cancel-button:hover{
+	color: white;
+	background:transparent;
+}
+
+.list{
+	text-align: left;
+	list-style: none;
+	margin: 24px auto 0;
+	padding:0;
+	width:150px;
+	font-size: 20px;
+}
+
+.list li {
+	padding:4px;
+	white-space: nowrap;
+}
+.checkmark{
+	display: inline-block;
+	vertical-align: -2px;
+}
+.check-icon {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-image:url("../images/list-unchecked.png");
+	background-size: contain;
+	vertical-align: -2px;
+}
+
+.is-completed:checked + .check-icon{
+	background-image: url("../images/list-checked.png");
+}
+
+.is-completed:checked + .check-icon + .item-name {
+	text-decoration: line-through;
+}
+
+.is-completed{
+	display: none;
+}
+
+.fa-trash-o 	{
+	color:red;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.preload {
+	/* position: absolute; */
+	display: block;
+	width: 5px;
+	height: 5px;
+	overflow: hidden;
+	left:-1000px;
+}
+
+
+@media (max-width: 414px){
+	.top-navigation .fa {
+		font-size: 1.8em;
+		top: 0.9em;
+	}
+	.top-navigation .fa-bars {
+		left: .5em;
+	}
+	.top-navigation .fa-plus-square-o {
+		right: .5em;
+	}
+	h1 {
+		font-size: 1.8em; 
+	}
+	.logo {
+		height: 42px;
+		vertical-align: -11px;
+	}
+	.input-text, #submit-button {
+		display: block;
+		margin:0 auto;
+		width:50%;
+		margin-bottom: 10px;
+	}
+	.list-menu {
+		width:60%
+	}
+	
+}
