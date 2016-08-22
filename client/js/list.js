@@ -1,4 +1,31 @@
 $(document).ready(function(){
+	var loggedInUser;
+	var registerUser = function(user){
+		return $.ajax({
+			method:"POST",
+			url:"/api/users",
+			data: JSON.stringify(user),
+			contentType: "application/json"
+		})
+	}
+	
+	var loginUser = function(user){
+		return $.ajax({
+			method:"POST",
+			url:"/api/login",
+			data: JSON.stringify(user),
+			contentType: "application/json"
+		})
+	}
+	
+	var getStatus = function(){
+		return $.ajax({
+			method:"POST",
+			url:"/api/status",
+			contentType: "application/json"
+		})
+	}
+	
 	var loadlists = function(){
 		return $.ajax({
 			method:"GET",
@@ -253,10 +280,103 @@ $(document).ready(function(){
 	function hideCreateForm(){
 		$('.newlist').hide().find('.input-text').val("")
 	}
-	loadlists().then(function(response){
-		response.forEach(function(list){
-			addList(list)
+	
+	function init(user){
+		loggedInUser = user
+		loadlists().then(function(response){
+			showUserBar(user)
+			showCreateButton()
+			response.forEach(function(list){
+				addList(list)
+			});
 		});
-	});
-
+	}
+	
+	$(".register-link").on('click', function(event){
+		event.preventDefault()
+		hideLoginForm()
+		showRegisterForm()
+	})
+	
+	$(".login-link").on("click", function(event){
+		event.preventDefault()
+		hideRegisterForm()
+		showLoginForm()
+	})
+	
+	$('.register-form').on('submit', function(event) {
+	    event.preventDefault()
+	    var $form = $(this)
+	    var user = {
+	    	username: $form.find('[name = email]').val(),
+	    	password: $form.find('[name = password]').val(),
+	    	passwordconfirmation: $form.find('[name = passwordconfirmation]').val()
+	    }
+	    console.log(user)
+	    if (user.password != user.passwordconfirmation){
+	    	alert('Passwords do not match!')
+			return
+	    }
+	    registerUser(user).then(function(){
+	    	hideRegisterForm()
+	    	init(user)
+	    }, function(response){
+	    	alert(response.responseJSON.message)
+	    })
+	})
+	
+	function showRegisterForm(){
+		$('.register-form').show()
+	}
+	
+	function hideRegisterForm(){
+		$('.register-form').hide().get(0).reset()
+	}
+	
+	function showLoginForm(){
+		$('.login-form').show()
+	}
+	
+	function hideLoginForm(){
+		$('.login-form').hide().get(0).reset()
+	}
+	
+	$('.login-form').on('submit', function(event) {
+	    event.preventDefault()
+	    var $form = $(this)
+	    var user = {
+	    	username: $form.find('[name = email]').val(),
+	    	password: $form.find('[name = password]').val(),
+	    }
+	    loginUser(user).then(function(){
+	    	hideLoginForm()
+	    	init(user)
+	    })
+	})
+	
+	var showUserBar = function(user){
+		$(".user-bar").show().find(".username").text(user.username)
+	}
+	
+	var hideUserBar = function(){
+		$(".user-bar").hide().find(".username").text("")
+	}
+	
+	var showCreateButton = function(){
+		$(".fa-plus-square-o").show()
+	}
+	
+	var hideCreateButton = function(){
+		$(".fa-plus-square-o").hide()
+	}
+	
+	getStatus().then(function(user){
+		if(user){
+			loggedInUser = user
+			init(user)
+		}
+		else{
+			showLoginForm()
+		}
+	})
 }); //doc.ready

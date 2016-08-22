@@ -50,8 +50,16 @@ h1{
 	height: 50px;
 }
 
-.item-list {
+.item-list, .register-form, .login-form, .user-bar, .fa.fa-plus-square-o {
 	display: none;
+}
+
+.user-bar {
+	position:fixed;
+	bottom: 0;
+	left: 0;
+	width:100%;
+	text-align: center;
 }
 
 .list-menu {
@@ -237,6 +245,17 @@ hr {
 	}
 	.list-menu {
 		width:60%
+	}
+	.login-form, .register-form{
+		text-align: center;
+	}
+	.login-form input, .login-form button, .register-form input, .register-form button{
+		display: block;
+		margin: 0 auto 10px;
+	}
+	.login-form input, .register-form input {
+		border:solid 1px lightgray;
+		border-radius: 2px;
 	}
 	
 }
